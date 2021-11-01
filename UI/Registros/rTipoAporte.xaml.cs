@@ -17,30 +17,26 @@ using System.Windows.Shapes;
 namespace GestionPersonas.UI.Registros
 {
     /// <summary>
-    /// Interaction logic for rPersonas.xaml
+    /// Interaction logic for rTipoAporte.xaml
     /// </summary>
-    public partial class rPersonas : Window
+    public partial class rTipoAporte : Window
     {
-        private Personas persona = new Personas();
-        public rPersonas()
+        private TipoAporte tipoAporte = new TipoAporte();
+        public rTipoAporte()
         {
             InitializeComponent();
-            this.DataContext = persona;
-
-            RolesComboBox.ItemsSource = RolesBLL.GetRoles();
-            RolesComboBox.SelectedValuePath = "RolId";
-            RolesComboBox.DisplayMemberPath = "Descripcion";
+            this.DataContext = tipoAporte;
         }
         private void Limpiar()
         {
-            this.persona = new Personas();
-            this.DataContext = persona;
+            this.tipoAporte = new TipoAporte();
+            this.DataContext = tipoAporte;
         }
         private bool Validar()
         {
             bool esValido = true;
 
-            if (NombreTextBox.Text.Length == 0 || TelefonoTextBox.Text.Length == 0 || CedulaTextBox.Text.Length == 0 || RolesComboBox.Text.Length == 0)
+            if (DescripcionTextBox.Text.Length == 0 || MetaTextBox.Text.Length == 0)
             {
                 esValido = false;
                 MessageBox.Show("Ingrese el campo faltante", "Fallo",
@@ -51,14 +47,15 @@ namespace GestionPersonas.UI.Registros
         }
         private void BuscarButton_Click(object sender, RoutedEventArgs e)
         {
-            var persona = PersonasBLL.Buscar(Utilidades.ToInt(PersonaIdTextBox.Text));
+            var tAporte = TipoAporteBLL.Buscar(Utilidades.ToInt(IdTextBox.Text));
 
-            if (persona != null)
-                this.persona = persona;
+            if (tAporte != null)
+                this.tipoAporte = tAporte;
             else
-                this.persona = new Personas();
+                this.tipoAporte = new TipoAporte();
 
-            this.DataContext = this.persona;
+            this.DataContext = this.tipoAporte;
+
         }
 
         private void NuevoButton_Click(object sender, RoutedEventArgs e)
@@ -66,27 +63,9 @@ namespace GestionPersonas.UI.Registros
             Limpiar();
         }
 
-        private void GuardarButton_Click(object sender, RoutedEventArgs e)
-        {
-            if (!Validar())
-                return;
-
-            var paso = PersonasBLL.Guardar(persona);
-
-            if (paso)
-            {
-                Limpiar();
-                MessageBox.Show("Guardo exitosamente", "Exito",
-                    MessageBoxButton.OK, MessageBoxImage.Information);
-            }
-            else
-                MessageBox.Show("No guardo", "Fallo",
-                    MessageBoxButton.OK, MessageBoxImage.Error);
-        }
-
         private void EliminarButton_Click(object sender, RoutedEventArgs e)
         {
-            if (PersonasBLL.Eliminar(Utilidades.ToInt(PersonaIdTextBox.Text)))
+            if (TipoAporteBLL.Eliminar(Utilidades.ToInt(IdTextBox.Text)))
             {
                 Limpiar();
                 MessageBox.Show("Registro eliminado!", "Exito",
@@ -97,9 +76,22 @@ namespace GestionPersonas.UI.Registros
                     MessageBoxButton.OK, MessageBoxImage.Error);
         }
 
-        private void RolesComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void GuardarButton_Click(object sender, RoutedEventArgs e)
         {
+            if (!Validar())
+                return;
 
+            var paso = TipoAporteBLL.Guardar(tipoAporte);
+
+            if (paso)
+            {
+                Limpiar();
+                MessageBox.Show("¡Transaccion exitosa!", "Exito",
+                    MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            else
+                MessageBox.Show("¡Transaccion Fallida", "Fallo",
+                    MessageBoxButton.OK, MessageBoxImage.Error);
         }
     }
 }

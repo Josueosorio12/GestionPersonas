@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GestionPersonas"
         mc:Ignorable="d"
-        Title="Ventana Principal" Height="300" Width="400">
+        Title="Ventana Principal" Height="240" Width="226">
     <Grid>
         <StackPanel>
             <Menu Height="20">
@@ -13,6 +13,8 @@
                     <MenuItem x:Name="PersonaMenuItem" Header="Registro de Personas" Click="PersonaMenuItem_Click"/>
                     <MenuItem x:Name="RolMenuItem" Header="Registro de Roles" Click="RolMenuItem_Click"/>
                     <MenuItem x:Name="GrupoMenuItem" Header="Registro de Grupos" Click="GrupoMenuItem_Click"/>
+                    <MenuItem x:Name="AporteMenuItem" Header="Registro De Aportes" Click="AporteMenuItem_Click"/>
+                    <MenuItem x:Name="TipoAporteMenuItem" Header="Registro de Tips de Aporte" Click="TipoAporteMenuItem_Click"/>
                 </MenuItem>
             </Menu>
         </StackPanel>

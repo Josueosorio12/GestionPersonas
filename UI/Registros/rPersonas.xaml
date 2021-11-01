@@ -33,7 +33,7 @@
                 <TextBox x:Name="CedulaTextBox" Text="{Binding Cedula}"/>
 
                 <Label Content="Roles"/>
-                <ComboBox x:Name="RolesComboBox" SelectedValue="{Binding RolId}" />
+                <ComboBox x:Name="RolesComboBox" SelectedValue="{Binding RolId}" SelectionChanged="RolesComboBox_SelectionChanged" />
             </StackPanel>
 
             <!--BARRA DE BOTONES-->
